@@ -11,7 +11,7 @@ const isIgnored = (path, ignores) => {
 };
 
 module.exports = {
-  fsPrefix: '@hot/fs/',
+  hotExt: '.hot',
   getRootModule,
   isIgnored
 };

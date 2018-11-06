@@ -1,4 +1,4 @@
-const cahce = new Map();
+const cache = new Map();
 
 const get = path => {
   console.log(`cachce.get(${JSON.stringify(path)})`);

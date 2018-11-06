@@ -17,7 +17,7 @@ const handlerNames = [
 
 const handler = handlerNames.reduce((handler, name) => {
   return Object.assign(handler, { [name]: (target, ...args) => {
-    console.log(`> ${target.label} is triggered with ${name}(${[...args].join(', ')})`);
+    console.log(`> ${target.label} is triggered with ${name}(...${args.length})`);
     return Reflect[name](target.source, ...args);
   }});
 }, {});
