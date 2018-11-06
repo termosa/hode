@@ -1,22 +1,22 @@
-const Module = require('module');
 const fs = require('fs');
-const path = require('path');
-const { fileExtensions, ignore } = require('./config');
-const { isIgnored } = require('./helpers');
-
-const getRootModule = module => module.parent ? getRootModule(module.parent) : module;
-
-const wrap = (filename, options) => {
-  return fs.readFileSync(filename).toString();
-};
+const proxify = require('./proxify');
+const { ignore } = require('./config');
+const { isIgnored, fsPrefix } = require('./helpers');
+const hash = require('./hash');
+const hotRequire = require('./require');
 
 const loadFile = (defaultLoader, module, filename) => {
-  const options = module.options || getRootModule(module).options;
   if (isIgnored(filename, ignore)) {
+    console.log(`Igonred ${filename}`);
     return defaultLoader(module, filename);
   }
-  const proxied = wrap(filename, options);
-  return module._compile(proxied, filename);
+  console.log(`Request ${filename}`);
+  const source = fs.readFileSync(filename).toString();
+  const fileId = fsPrefix + hash(filename, source);
+  hotRequire.register(filename, fileId);
+  const code = proxify(filename);
+  console.log(`Compile ${fileId}\n---\n${code}\n---`);
+  return module._compile(code, fileId);
 };
 
 if (require.extensions) {
@@ -26,23 +26,4 @@ if (require.extensions) {
       exts[ext] = loadFile.bind(exts[ext], exts[ext].bind(exts));
     });
 }
-
-/* TODO
-child_process = require('child_process');
-if (child_process) {
-  const {fork} = child_process;
-  const binary = require.resolve('../../bin/coffee');
-  child_process.fork = function(path, args, options) {
-    if (helpers.isCoffee(path)) {
-      if (!Array.isArray(args)) {
-        options = args || {};
-        args = [];
-      }
-      args = [path].concat(args);
-      path = binary;
-    }
-    return fork(path, args, options);
-  };
-}
-*/
 
