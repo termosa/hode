@@ -1,3 +1,6 @@
+const debug = require('util').debuglog('hode');
+const hotRequire = require('./require');
+
 const handlerNames = [
   'apply', // (target, thisArgument, argumentsList) → any
   'construct', // (target, argumentsList, newTarget?) → Object
@@ -17,14 +20,15 @@ const handlerNames = [
 
 const handler = handlerNames.reduce((handler, name) => {
   return Object.assign(handler, { [name]: (target, ...args) => {
-    console.log(`> ${target.label} is triggered with ${name}(...${args.length})`);
-    return Reflect[name](target.source, ...args);
+    debug(`> ${target.filename} is triggered with ${name}(...${args.length})`);
+    const module = hotRequire(target.filename);
+    return Reflect[name](module, ...args);
   }});
 }, {});
 
-const proxy = (target, label = Math.random().toString().slice(2, 8)) => {
-  const trg = typeof target === 'function' ? () => {} : {};
-  Object.assign(trg, { label, source: target });
+const proxy = filename => {
+  const trg = () => {};
+  Object.assign(trg, { filename });
   return new Proxy(trg, handler);
 };
 

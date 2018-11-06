@@ -6,7 +6,8 @@ const hash = (path, content) => {
   return crypto
     .createHash('sha1')
     .update(path + content)
-    .digest('base64');
+    .digest('base64')
+    .replace(/\//g, '_');
 };
 
 module.exports = hash;

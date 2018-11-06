@@ -1,3 +1,28 @@
 {
-  "name": "hot-node"
+  "name": "hode",
+  "version": "0.0.0",
+  "description": "Hot-reload for Node.js modules",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/termosa/hode.git"
+  },
+  "keywords": [
+    "hot",
+    "reload",
+    "autoload",
+    "restart",
+    "fast",
+    "development",
+    "replace"
+  ],
+  "author": "Stanislav Termosa <termosa.stanislav@gmail.com> (https://me.st/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/termosa/hode/issues"
+  },
+  "homepage": "https://github.com/termosa/hode#readme",
+  "dependencies": {
+    "chokidar": "^2.0.4"
+  }
 }

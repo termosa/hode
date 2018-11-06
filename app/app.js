@@ -1,3 +1,9 @@
+// app.js
+
 const { add } = require('./lib');
 
-console.log(add(3, 3));
+const app = () => {
+  console.log(add(3, 4));
+};
+
+module.exports = app;
