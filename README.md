@@ -1,4 +1,6 @@
-# Hot reloading for NodeJS modules
+# Hot reloading for Node.js modules
+
+![Hode - Hot reload for Node.js modules](https://github.com/termosa/hode/blob/master/docs/hode.png)
 
 ## Usage
 
