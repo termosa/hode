@@ -1,2 +1,0 @@
-require('./hot');
-require('./app');

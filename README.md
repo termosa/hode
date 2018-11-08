@@ -3,9 +3,13 @@
 ## Usage
 
 ```bash
-$ node index.js
-# or
-$ node --require ./hot app
+$ node --require hode index.js
+```
+
+or at the top of your entry file
+
+```js
+require('hode/register')
 ```
 
 ## Tasks

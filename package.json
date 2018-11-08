@@ -2,7 +2,7 @@
   "name": "hode",
   "version": "0.0.0",
   "description": "Hot-reload for Node.js modules",
-  "main": "index.js",
+  "main": "register.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/termosa/hode.git"
