@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/termosa/hode#readme",
   "dependencies": {
-    "chokidar": "^2.0.4"
+    "chokidar": "^2.0.4",
+    "lixy": "0.0.4"
   }
 }
